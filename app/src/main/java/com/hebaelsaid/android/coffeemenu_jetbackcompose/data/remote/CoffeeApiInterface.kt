@@ -1,6 +1,6 @@
 package com.hebaelsaid.android.coffeemenu_jetbackcompose.data.remote
 
-import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.model.CoffeeResponseModel
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.model.responsemodel.CoffeeResponseModel
 import retrofit2.http.GET
 
 interface CoffeeApiInterface {

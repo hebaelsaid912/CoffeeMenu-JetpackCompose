@@ -1,4 +1,4 @@
-package com.hebaelsaid.android.coffeemenu_jetbackcompose.data.model
+package com.hebaelsaid.android.coffeemenu_jetbackcompose.data.model.responsemodel
 
 class CoffeeResponseModel : ArrayList<CoffeeResponseModel.CoffeeResponseModelItem>(){
     data class CoffeeResponseModelItem(
