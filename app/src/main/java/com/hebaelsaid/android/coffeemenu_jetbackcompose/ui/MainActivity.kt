@@ -1,4 +1,4 @@
-package com.hebaelsaid.android.coffeemenu_jetbackcompose
+package com.hebaelsaid.android.coffeemenu_jetbackcompose.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
