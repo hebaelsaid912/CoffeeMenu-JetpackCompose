@@ -1,9 +1,11 @@
 package com.hebaelsaid.android.coffeemenu_jetbackcompose.data.repository
 
-import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.model.CoffeeResponseModel
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.model.responsemodel.CoffeeResponseModel
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.remote.CoffeeApiInterface
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.domain.repository.CoffeeRepoImpl
+import javax.inject.Inject
 
-class CoffeeRepositoryImpl(private val api: CoffeeApiInterface): CoffeeApiInterface {
+class CoffeeRepositoryImpl @Inject constructor(private val api: CoffeeApiInterface): CoffeeRepoImpl {
     override suspend fun getHotCoffee(): CoffeeResponseModel {
         return api.getHotCoffee()
     }
