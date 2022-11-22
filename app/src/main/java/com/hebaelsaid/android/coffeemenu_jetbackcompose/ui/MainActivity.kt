@@ -25,7 +25,9 @@ import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.home.compone
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.home.component.TabsContent
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.CoffeeMenuJetbackComposeTheme
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.Brown40
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
