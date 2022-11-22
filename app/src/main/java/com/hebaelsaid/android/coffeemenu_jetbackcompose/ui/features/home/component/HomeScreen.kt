@@ -22,6 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.*
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.Brown40
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.BrownGrey40
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.Coffee80
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.CoffeeGrey80
 import kotlinx.coroutines.launch
 
@@ -31,7 +33,7 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
     val scope = rememberCoroutineScope()
     TabRow(
         selectedTabIndex = pagerState.currentPage,
-        backgroundColor = Brown40,
+        backgroundColor = Coffee80,
         modifier = Modifier
             .padding(10.dp)
             .background(Color.Transparent)
@@ -52,7 +54,7 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
             }
             LaunchedEffect(key1 = pagerState.currentPage == index) {
                 color.animateTo(
-                    if (pagerState.currentPage == index) Color.White else Brown40
+                    if (pagerState.currentPage == index) Color.White else Coffee80
                 )
             }
             Tab(
@@ -73,7 +75,7 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
                                 fontWeight = FontWeight.Bold
                             )
                         else
-                            TextStyle(color = CoffeeGrey80, fontSize = 18.sp)
+                            TextStyle(color = BrownGrey40, fontSize = 18.sp)
                     )
                 },
                 modifier = Modifier.background(

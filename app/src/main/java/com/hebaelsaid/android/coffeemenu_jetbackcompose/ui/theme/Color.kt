@@ -7,5 +7,6 @@ val CoffeeGrey80 = Color(0xFFEBDDCD)
 val Pink80 = Color(0xFFEFB8C8)
 
 val Brown40 = Color(0xFF453630)
+val BrownGrey40 = Color(0xFF52423C)
 val CoffeeGrey40 = Color(0xFFC6B6A7)
 val Pink40 = Color(0xFF7D5260)
