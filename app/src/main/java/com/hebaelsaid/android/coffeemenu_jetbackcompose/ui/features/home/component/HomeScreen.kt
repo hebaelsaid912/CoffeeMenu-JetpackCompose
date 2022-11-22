@@ -21,8 +21,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.*
-import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.Purple40
-import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.PurpleGrey80
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.Brown40
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.CoffeeGrey80
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
@@ -31,7 +31,7 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
     val scope = rememberCoroutineScope()
     TabRow(
         selectedTabIndex = pagerState.currentPage,
-        backgroundColor = Purple40,
+        backgroundColor = Brown40,
         modifier = Modifier
             .padding(10.dp)
             .background(Color.Transparent)
@@ -48,11 +48,11 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
     ) {
         tabs.forEachIndexed { index, tabItem ->
             val color = remember {
-                Animatable(PurpleGrey80)
+                Animatable(CoffeeGrey80)
             }
             LaunchedEffect(key1 = pagerState.currentPage == index) {
                 color.animateTo(
-                    if (pagerState.currentPage == index) Color.White else Purple40
+                    if (pagerState.currentPage == index) Color.White else Brown40
                 )
             }
             Tab(
@@ -68,12 +68,12 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
                         text = tabItem.title,
                         style = if (pagerState.currentPage == index)
                             TextStyle(
-                                color = Purple40,
+                                color = Brown40,
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold
                             )
                         else
-                            TextStyle(color = PurpleGrey80, fontSize = 18.sp)
+                            TextStyle(color = CoffeeGrey80, fontSize = 18.sp)
                     )
                 },
                 modifier = Modifier.background(

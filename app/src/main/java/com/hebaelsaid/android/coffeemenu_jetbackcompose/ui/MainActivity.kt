@@ -24,7 +24,7 @@ import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.home.compone
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.home.component.Tabs
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.home.component.TabsContent
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.CoffeeMenuJetbackComposeTheme
-import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.Purple40
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.Brown40
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
         Column(modifier = Modifier.fillMaxSize()) {
             Text(
                 text = "Coffee Categories",
-                color = Purple40,
+                color = Brown40,
                 fontSize = 25.sp,
                 modifier = Modifier.padding(10.dp,20.dp),
                 fontWeight = FontWeight.Bold
