@@ -22,7 +22,7 @@ import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.home.viewmod
 private const val TAG = "HotCoffeeScreen"
 @Composable
 fun HotCoffeeScreen(
-    navController: NavController?=null,
+    navController: NavController,
     viewModel: HotCoffeeListViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
@@ -32,7 +32,7 @@ fun HotCoffeeScreen(
         LazyColumn(modifier = Modifier
             .fillMaxSize()
             .padding(10.dp)){
-            Log.d(TAG, "HotCoffeeScreen: state.modelItem.size: $state.modelItem.size")
+            Log.d(TAG, "HotCoffeeScreen: state.modelItem.size: ${state.modelItem.size}")
                 items(state.modelItem.size){ coffeeModels ->
                 CoffeeListItem(model = state.modelItem[coffeeModels], onItemClick ={
                    // navController.navigate(Screen.CoinDetailsScreen.route + "/${coffeeModel.coin_id}")

@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.*
@@ -27,9 +28,32 @@ import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.Coffee80
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.CoffeeGrey80
 import kotlinx.coroutines.launch
 
+@Composable
+fun HomeScreen() {
+    MainContent()
+}
+
+@OptIn(ExperimentalPagerApi::class)
+@Preview
+@Composable
+fun MainContent() {
+    val list = listOf(TabItem.HotCoffee,TabItem.IcedCoffee)
+    val pagerState = rememberPagerState()
+    Column(modifier = Modifier.fillMaxSize()) {
+        Text(
+            text = "Coffee Menu",
+            color = Brown40,
+            fontSize = 25.sp,
+            modifier = Modifier.padding(10.dp,20.dp),
+            fontWeight = FontWeight.Bold
+        )
+        Tabs(tabs = list, pagerState = pagerState)
+        TabsContent(tabs = list, pagerState = pagerState)
+    }
+}
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
+private fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
     val scope = rememberCoroutineScope()
     TabRow(
         selectedTabIndex = pagerState.currentPage,
@@ -93,7 +117,7 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun TabsContent(tabs: List<TabItem>, pagerState: PagerState) {
+private fun TabsContent(tabs: List<TabItem>, pagerState: PagerState) {
     HorizontalPager(count = tabs.size, state = pagerState) { page ->
         tabs[page].screen()
     }

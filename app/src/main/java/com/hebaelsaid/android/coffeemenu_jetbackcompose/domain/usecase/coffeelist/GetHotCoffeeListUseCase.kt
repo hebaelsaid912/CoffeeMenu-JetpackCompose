@@ -15,7 +15,7 @@ class GetHotCoffeeListUseCase @Inject constructor(
         try {
             emit(Resource.Loading<CoffeeResponseModel>())
             val coffeeResponseModel = repository.getHotCoffee()
-            emit(Resource.Success<CoffeeResponseModel>(coffeeResponseModel))
+            emit(Resource.Success<CoffeeResponseModel>(data = coffeeResponseModel))
         }catch (e: HttpException){
             emit(Resource.Error<CoffeeResponseModel>(e.localizedMessage?: "An unexpected error occurred"))
         }catch (e: IOException){

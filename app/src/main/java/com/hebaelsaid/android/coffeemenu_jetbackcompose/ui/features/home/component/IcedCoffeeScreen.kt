@@ -20,7 +20,7 @@ import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.home.viewmod
 
 @Composable
 fun IcedCoffeeScreen(
-    navController: NavController?=null,
+    navController: NavController,
     viewModel: IcedCoffeeListViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
