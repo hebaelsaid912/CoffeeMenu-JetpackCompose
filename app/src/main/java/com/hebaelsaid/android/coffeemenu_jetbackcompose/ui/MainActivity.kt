@@ -13,6 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.home.component.*
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.onboarding.component.OnBoardingScreen
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.CoffeeMenuJetbackComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,7 +38,11 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun SetupAppRouteNavigation() {
         val navController = rememberNavController()
-        NavHost(navController = navController, startDestination = Screen.HomeScreen.route) {
+        NavHost(navController = navController, startDestination = Screen.OnBoardingScreen.route) {
+            composable(route = Screen.OnBoardingScreen.route ) {
+                Log.d(TAG, "SetupAppRouteNavigation: OnBoardingScreen")
+                OnBoardingScreen(navController = navController)
+            }
             composable(route = Screen.HomeScreen.route ) {
                 Log.d(TAG, "SetupAppRouteNavigation: HomeScreen")
                 HomeScreen()
