@@ -26,8 +26,8 @@ class IcedCoffeeListViewModel @Inject constructor(
         getIcedCoffeeUseCase().onEach { resultState->
             when(resultState){
                 is Resource.Success ->{
-                    if(resultState.data.isNullOrEmpty()) {
-                        _state.value = CoffeeListState(modelItem = resultState.data!!)
+                    if(!resultState.data.isNullOrEmpty()) {
+                        _state.value = CoffeeListState(modelItem = resultState.data)
                     }else{
                         _state.value = CoffeeListState(error ="Data Return With Null")
                     }
