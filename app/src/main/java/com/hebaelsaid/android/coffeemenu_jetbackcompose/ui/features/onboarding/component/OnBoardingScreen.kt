@@ -1,6 +1,7 @@
 package com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.onboarding.component
 
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -24,6 +26,9 @@ import com.google.accompanist.pager.*
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.R
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.model.uimodel.OnBoardingUiModel
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.*
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -32,7 +37,7 @@ fun OnBoardingScreen(navController: NavController) {
     val items = setupOnBoardingUiModels()
     Column(modifier = Modifier.fillMaxSize()) {
         //  OnBoardingPager(item = items, pagerState = pagerState)
-        OnBoardingPager(items, pagerState)
+        OnBoardingPager(navController,items, pagerState)
     }
 }
 
@@ -68,59 +73,23 @@ private fun setupOnBoardingUiModels(): ArrayList<OnBoardingUiModel> {
     return items
 }
 
-/*@ExperimentalPagerApi
-@Composable
-private fun OnBoardingPager(item: List<OnBoardingUiModel>, pagerState: PagerState) {
-    val scope = rememberCoroutineScope()
-    TabRow(
-        selectedTabIndex = pagerState.currentPage,
-        backgroundColor = Coffee80,
-        modifier = Modifier
-            .padding(10.dp)
-            .background(Color.Transparent)
-            .height(40.dp)
-            .clip(RoundedCornerShape(20.dp)),
-        indicator = { tabPositions ->
-            TabRowDefaults.Indicator(
-                Modifier
-                    .pagerTabIndicatorOffset(pagerState = pagerState, tabPositions = tabPositions)
-                    .width(0.dp)
-                    .height(0.dp)
-            )
-        }
-    ) {
-        item.forEachIndexed { index, onBoardingUiModel ->
-            val color = remember {
-                Animatable(CoffeeGrey80)
-            }
-            LaunchedEffect(key1 = pagerState.currentPage == index) {
-                color.animateTo(
-                    if (pagerState.currentPage == index) CoffeeGrey40 else Coffee80
-                )
-            }
-            Tab(
-                selected = pagerState.currentPage == index,
-                onClick = {
-                    scope.launch {
-                        pagerState.animateScrollToPage(index)
-                    }
-                },
-                text = null,
-                modifier = Modifier.background(
-                    color = color.value,
-                    shape = RoundedCornerShape(20.dp)
-                )
-            )
-        }
-    }
-}*/
-
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun OnBoardingPager(pages: List<OnBoardingUiModel>, pagerState: PagerState) {
+fun OnBoardingPager(
+    navController: NavController,
+    pages: List<OnBoardingUiModel>,
+    pagerState: PagerState
+) {
     HorizontalPager(count = pages.size, state = pagerState) { page ->
         SetupPageDesign(pages[page])
         PagerIndicator(items = pages, currentPage = pagerState.currentPage)
+        Column(
+            modifier =  Modifier.fillMaxSize().background(Color.Transparent).padding(20.dp),
+            horizontalAlignment = Alignment.End,
+            verticalArrangement = Arrangement.Bottom
+        ) {
+            SetupNextButton(navController, pagerState)
+        }
     }
 
 }
@@ -184,7 +153,7 @@ private fun SetupPageDesign(pageData: OnBoardingUiModel) {
 fun PagerIndicator(currentPage: Int, items: List<OnBoardingUiModel>) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.padding(top = 20.dp)
+        modifier = Modifier.padding(top = 20.dp, start = 20.dp)
     ) {
         repeat(items.size) {
             Indicator(isSelected = it == currentPage, color = BrownGrey40)
@@ -206,4 +175,56 @@ fun Indicator(isSelected: Boolean, color: Color) {
                 if (isSelected) color else CoffeeGrey80.copy(alpha = 0.5f)
             )
     )
+}
+
+@OptIn(ExperimentalPagerApi::class, DelicateCoroutinesApi::class)
+@Composable
+fun SetupNextButton(navController: NavController, pagerState: PagerState) {
+    if (pagerState.currentPage != 2) {
+        OutlinedButton(
+            onClick = {
+                GlobalScope.launch {
+                    pagerState.scrollToPage(
+                        pagerState.currentPage + 1,
+                        pageOffset = 0f
+                    )
+                }
+            },
+            border = BorderStroke(
+                14.dp,
+                BrownGrey40
+            ),
+            shape = RoundedCornerShape(50),
+            colors = ButtonDefaults.outlinedButtonColors(contentColor = BrownGrey40),
+            modifier = Modifier.size(65.dp)
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_arrow_back),
+                contentDescription = "",
+                tint = BrownGrey40,
+                modifier = Modifier.fillMaxSize().rotate(180f)
+            )
+        }
+    } else {
+        Button(
+            onClick = {
+                //show home screen
+            },
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = BrownGrey40
+            ),
+            contentPadding = PaddingValues(vertical = 12.dp),
+            elevation = ButtonDefaults.elevation(
+                defaultElevation = 0.dp
+            )
+        ) {
+            Text(
+                text = "Get Started",
+                color = Color.White,
+                fontSize = 16.sp
+            )
+        }
+    }
+
 }
