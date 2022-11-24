@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.details.component.CoffeeDetailsScreen
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.home.component.*
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.onboarding.component.OnBoardingScreen
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.CoffeeMenuJetbackComposeTheme
@@ -57,7 +58,7 @@ class MainActivity : ComponentActivity() {
             }
             composable(route = Screen.HomeScreen.route + "/${Screen.CoffeeDetailsScreen.route}") {
                 Log.d(TAG, "SetupAppRouteNavigation: CoffeeDetailsScreen")
-                //CoffeeDetailsScreen()
+                CoffeeDetailsScreen()
                 TODO("call CoffeeDetailsScreen")
             }
         }
