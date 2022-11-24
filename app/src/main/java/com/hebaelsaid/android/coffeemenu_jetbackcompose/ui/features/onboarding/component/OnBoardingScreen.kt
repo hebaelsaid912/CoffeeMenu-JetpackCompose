@@ -1,13 +1,12 @@
 package com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.onboarding.component
 
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.TabRow
-import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -120,14 +119,14 @@ private fun OnBoardingPager(item: List<OnBoardingUiModel>, pagerState: PagerStat
 @Composable
 fun OnBoardingPager(pages: List<OnBoardingUiModel>, pagerState: PagerState) {
     HorizontalPager(count = pages.size, state = pagerState) { page ->
-        SetupPageDesign(pages[page],pagerState)
+        SetupPageDesign(pages[page])
+        PagerIndicator(items = pages, currentPage = pagerState.currentPage)
     }
 
 }
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
-private fun SetupPageDesign(pageData: OnBoardingUiModel, pagerState: PagerState) {
+private fun SetupPageDesign(pageData: OnBoardingUiModel) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -138,28 +137,20 @@ private fun SetupPageDesign(pageData: OnBoardingUiModel, pagerState: PagerState)
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.FillBounds
         )
-        TabRow(
-            selectedTabIndex = 0,
+        Card(
             backgroundColor = transCoffee,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(250.dp)
                 .background(Color.Transparent)
-                .clip(RoundedCornerShape(bottomEnd = 80.dp, bottomStart = 20.dp))
                 .align(Alignment.TopStart),
-            indicator = { tabPositions ->
-                TabRowDefaults.Indicator(
-                    Modifier
-                        .background(Color.Transparent)
-                        .pagerTabIndicatorOffset(pagerState = pagerState, tabPositions = tabPositions)
-                        .width(0.dp)
-                        .height(0.dp)
-                )
-            }
+            elevation = 0.dp,
+            shape = RoundedCornerShape(bottomEnd = 80.dp, bottomStart = 20.dp)
         ) {
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
+
                 Text(
                     text = pageData.title,
                     color = Brown40,
@@ -187,4 +178,32 @@ private fun SetupPageDesign(pageData: OnBoardingUiModel, pagerState: PagerState)
             }
         }
     }
+}
+
+@Composable
+fun PagerIndicator(currentPage: Int, items: List<OnBoardingUiModel>) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier.padding(top = 20.dp)
+    ) {
+        repeat(items.size) {
+            Indicator(isSelected = it == currentPage, color = BrownGrey40)
+        }
+    }
+}
+
+@Composable
+fun Indicator(isSelected: Boolean, color: Color) {
+    val width = animateDpAsState(targetValue = if (isSelected) 40.dp else 10.dp)
+
+    Box(
+        modifier = Modifier
+            .padding(4.dp)
+            .height(10.dp)
+            .width(width.value)
+            .clip(CircleShape)
+            .background(
+                if (isSelected) color else CoffeeGrey80.copy(alpha = 0.5f)
+            )
+    )
 }
