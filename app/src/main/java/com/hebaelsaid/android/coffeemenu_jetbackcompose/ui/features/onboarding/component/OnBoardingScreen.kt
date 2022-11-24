@@ -25,6 +25,7 @@ import androidx.navigation.NavController
 import com.google.accompanist.pager.*
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.R
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.model.uimodel.OnBoardingUiModel
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.Screen
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -208,7 +209,7 @@ fun SetupNextButton(navController: NavController, pagerState: PagerState) {
     } else {
         Button(
             onClick = {
-                //show home screen
+                navController.navigate(Screen.OnBoardingScreen.route + "/${Screen.HomeScreen.route}")
             },
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(

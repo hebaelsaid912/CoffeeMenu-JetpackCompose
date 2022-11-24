@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
                 Log.d(TAG, "SetupAppRouteNavigation: OnBoardingScreen")
                 OnBoardingScreen(navController = navController)
             }
-            composable(route = Screen.HomeScreen.route ) {
+            composable(route = Screen.OnBoardingScreen.route + "/${Screen.HomeScreen.route}" ) {
                 Log.d(TAG, "SetupAppRouteNavigation: HomeScreen")
                 HomeScreen()
             }
