@@ -1,5 +1,6 @@
 package com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.onboarding.component
 
+import android.util.Log
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -29,8 +30,10 @@ import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.Screen
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+private const val TAG = "OnBoardingScreen"
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun OnBoardingScreen(navController: NavController) {
@@ -85,7 +88,10 @@ fun OnBoardingPager(
         SetupPageDesign(pages[page])
         PagerIndicator(items = pages, currentPage = pagerState.currentPage)
         Column(
-            modifier =  Modifier.fillMaxSize().background(Color.Transparent).padding(20.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Transparent)
+                .padding(20.dp),
             horizontalAlignment = Alignment.End,
             verticalArrangement = Arrangement.Bottom
         ) {
@@ -181,14 +187,17 @@ fun Indicator(isSelected: Boolean, color: Color) {
 @OptIn(ExperimentalPagerApi::class, DelicateCoroutinesApi::class)
 @Composable
 fun SetupNextButton(navController: NavController, pagerState: PagerState) {
+    Log.d(TAG, "SetupNextButton: pagerState.currentPage: ${pagerState.currentPage} ")
     if (pagerState.currentPage != 2) {
         OutlinedButton(
             onClick = {
                 GlobalScope.launch {
+                    Log.d(TAG, "SetupNextButton: pagerState.currentPage on click: ${pagerState.currentPage} ")
                     pagerState.scrollToPage(
                         pagerState.currentPage + 1,
                         pageOffset = 0f
                     )
+                 //   delay(500)
                 }
             },
             border = BorderStroke(
@@ -203,7 +212,9 @@ fun SetupNextButton(navController: NavController, pagerState: PagerState) {
                 painter = painterResource(id = R.drawable.ic_arrow_back),
                 contentDescription = "",
                 tint = BrownGrey40,
-                modifier = Modifier.fillMaxSize().rotate(180f)
+                modifier = Modifier
+                    .fillMaxSize()
+                    .rotate(180f)
             )
         }
     } else {
