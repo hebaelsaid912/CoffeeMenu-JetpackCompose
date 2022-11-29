@@ -1,6 +1,7 @@
 package com.hebaelsaid.android.coffeemenu_jetbackcompose.ui
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,11 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.model.responsemodel.CoffeeResponseModel
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.details.component.CoffeeDetailsScreen
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.home.component.*
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.onboarding.component.OnBoardingScreen
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.CoffeeMenuJetbackComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.parcelize.Parcelize
 
 private const val TAG = "MainActivity"
 @AndroidEntryPoint
@@ -46,21 +49,27 @@ class MainActivity : ComponentActivity() {
             }
             composable(route = Screen.OnBoardingScreen.route + "/${Screen.HomeScreen.route}" ) {
                 Log.d(TAG, "SetupAppRouteNavigation: HomeScreen")
-                HomeScreen()
+                HomeScreen(navController)
             }
-            composable(route = Screen.HomeScreen.route + "/${Screen.CoffeeListScreen.route}" + "/{hot}") {
-                Log.d(TAG, "SetupAppRouteNavigation: HotCoffeeScreen")
-                 HotCoffeeScreen(navController = navController)
-            }
-            composable(route = Screen.HomeScreen.route + "/${Screen.CoffeeListScreen.route}" + "/{iced}") {
-                Log.d(TAG, "SetupAppRouteNavigation: IcedCoffeeScreen")
-                IcedCoffeeScreen(navController = navController)
-            }
-            composable(route = Screen.HomeScreen.route + "/${Screen.CoffeeDetailsScreen.route}") {
+            composable(route = Screen.OnBoardingScreen.route + "/${Screen.CoffeeDetailsScreen.route}"/*,listOf(navArgument(
+                PARAM_COFFEE_MODEL) {
+                type = NavType.ParcelableType<CoffeeResponseModel.CoffeeResponseModelItem>(CoffeeResponseModel.CoffeeResponseModelItem::class.java)
+            })*/) { navBackStackEntry ->
                 Log.d(TAG, "SetupAppRouteNavigation: CoffeeDetailsScreen")
-                CoffeeDetailsScreen()
-                TODO("call CoffeeDetailsScreen")
+               /* val model = navBackStackEntry.arguments?.getParcelable<CoffeeResponseModel.CoffeeResponseModelItem>(PARAM_COFFEE_MODEL)
+                if (model != null) {
+                    CoffeeDetailsScreen(model)
+                }*/
+                CoffeeDetailsScreen( )
             }
+            
         }
     }
+    @Parcelize
+    sealed class Destination : Parcelable {
+        object OnBoarding : Destination()
+        object Home : Destination()
+        data class CoffeeDetails(val name: String, val coffeeDetails: CoffeeResponseModel.CoffeeResponseModelItem) : Destination()
+    }
+
 }

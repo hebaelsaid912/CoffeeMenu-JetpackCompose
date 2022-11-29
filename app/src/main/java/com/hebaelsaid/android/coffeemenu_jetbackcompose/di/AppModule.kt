@@ -2,7 +2,9 @@ package com.hebaelsaid.android.coffeemenu_jetbackcompose.di
 
 
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.remote.CoffeeApiInterface
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.repository.CoffeeDetailsRepositoryImpl
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.repository.CoffeeRepositoryImpl
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.domain.repository.CoffeeDetailsRemoImpl
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.domain.repository.CoffeeRepoImpl
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.utils.Constant.BASE_URL
 import dagger.Module
@@ -31,5 +33,10 @@ object AppModule  {
     @Singleton
     fun provideCoffeeRepository(api: CoffeeApiInterface): CoffeeRepoImpl {
         return CoffeeRepositoryImpl(api = api)
+    }
+    @Provides
+    @Singleton
+    fun provideCoffeeDetailsRepository(): CoffeeDetailsRemoImpl {
+        return CoffeeDetailsRepositoryImpl()
     }
 }

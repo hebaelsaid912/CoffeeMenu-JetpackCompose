@@ -18,9 +18,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.google.accompanist.pager.*
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.Brown40
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.BrownGrey40
@@ -29,14 +29,13 @@ import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.CoffeeGrey80
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeScreen() {
-    MainContent()
+fun HomeScreen(navController: NavController) {
+    MainContent(navController)
 }
 
 @OptIn(ExperimentalPagerApi::class)
-@Preview
 @Composable
-fun MainContent() {
+fun MainContent(navController: NavController) {
     val list = listOf(TabItem.HotCoffee,TabItem.IcedCoffee)
     val pagerState = rememberPagerState()
     Column(modifier = Modifier.fillMaxSize()) {
@@ -48,7 +47,7 @@ fun MainContent() {
             fontWeight = FontWeight.Bold
         )
         Tabs(tabs = list, pagerState = pagerState)
-        TabsContent(tabs = list, pagerState = pagerState)
+        TabsContent(navController,tabs = list, pagerState = pagerState)
     }
 }
 @OptIn(ExperimentalPagerApi::class)
@@ -117,8 +116,15 @@ private fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-private fun TabsContent(tabs: List<TabItem>, pagerState: PagerState) {
+private fun TabsContent(navController: NavController, tabs: List<TabItem>, pagerState: PagerState) {
     HorizontalPager(count = tabs.size, state = pagerState) { page ->
-        tabs[page].screen()
+        when(tabs[page].title){
+            "Hot" -> {
+                HotCoffeeScreen(navController = navController)
+            }
+            "Iced" -> {
+                IcedCoffeeScreen(navController = navController)
+            }
+        }
     }
 }
