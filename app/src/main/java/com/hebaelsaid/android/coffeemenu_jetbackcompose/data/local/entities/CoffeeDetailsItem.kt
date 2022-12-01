@@ -17,5 +17,7 @@ data class CoffeeDetailsItem(
     @ColumnInfo(name = "coffee_ingredients")
     val ingredients: List<String?>?,
     @ColumnInfo(name = "coffee_title")
-    val title: String? // Black
+    val title: String?, // Black
+    @ColumnInfo(name = "coffee_type")
+    val type: String? // Black
 )
