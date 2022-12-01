@@ -10,7 +10,7 @@ import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.local.entities.Iced
 @Dao
 interface CoffeeMenuDAO {
     // hot coffee table
-    @get:Query("SELECT * FROM hot_coffee_menu ORDER BY _id DESC")
+    @get:Query("SELECT * FROM hot_coffee_menu ORDER BY id DESC")
     val getHotAllCoffeeList:List<HotCoffeeDetailsItem>
     @Query("SELECT * FROM hot_coffee_menu WHERE coffee_title =:title")
     fun getHotCoffeeDetailsByName(title:String):HotCoffeeDetailsItem
@@ -20,7 +20,7 @@ interface CoffeeMenuDAO {
     suspend fun clearHotCoffeeMenuDatabase()
 
     // iced coffee table
-    @get:Query("SELECT * FROM iced_coffee_menu ORDER BY _id DESC")
+    @get:Query("SELECT * FROM iced_coffee_menu ORDER BY id DESC")
     val getAllIcedCoffeeList:List<IcedCoffeeDetailsItem>
     @Query("SELECT * FROM iced_coffee_menu WHERE coffee_title =:title")
     fun getIcedCoffeeDetailsByName(title:String):IcedCoffeeDetailsItem
