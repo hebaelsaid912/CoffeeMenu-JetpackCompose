@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
                 Log.d(TAG, "SetupAppRouteNavigation: HomeScreen")
                 HomeScreen(navController)
             }
-            composable(route = Screen.OnBoardingScreen.route + "/${Screen.CoffeeDetailsScreen.route}"/*,listOf(navArgument(
+            composable(route = Screen.OnBoardingScreen.route + "/${Screen.CoffeeDetailsScreen.route}"/*+ "/{${Constant.PARAM_COFFEE_MODEL}}"*//*,listOf(navArgument(
                 PARAM_COFFEE_MODEL) {
                 type = NavType.ParcelableType<CoffeeResponseModel.CoffeeResponseModelItem>(CoffeeResponseModel.CoffeeResponseModelItem::class.java)
             })*/) { navBackStackEntry ->
@@ -60,7 +60,7 @@ class MainActivity : ComponentActivity() {
                 if (model != null) {
                     CoffeeDetailsScreen(model)
                 }*/
-                CoffeeDetailsScreen( )
+                CoffeeDetailsScreen()
             }
             
         }

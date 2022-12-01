@@ -43,9 +43,7 @@ fun HotCoffeeScreen(
                 CoffeeListItem(model = state.modelItem[coffeeModels]) { model ->
                     Log.d(TAG, "HotCoffeeScreen: nav controller: ${navController.currentDestination}")
                    // NavHost(navController = navController, graph = )
-                    navController.navigate(
-                        Screen.OnBoardingScreen.route  + "/${Screen.CoffeeDetailsScreen.route}"
-                    )
+                    navController.navigate(Screen.OnBoardingScreen.route  + "/${Screen.CoffeeDetailsScreen.route}")
                 }
                 Divider()
             }
