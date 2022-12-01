@@ -1,4 +1,4 @@
-package com.hebaelsaid.android.coffeemenu_jetbackcompose.di
+package com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.di
 
 
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.remote.CoffeeApiInterface
