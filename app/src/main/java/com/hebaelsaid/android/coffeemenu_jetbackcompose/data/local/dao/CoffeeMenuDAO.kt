@@ -4,16 +4,28 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.local.entities.CoffeeDetailsItem
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.local.entities.HotCoffeeDetailsItem
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.local.entities.IcedCoffeeDetailsItem
 
 @Dao
 interface CoffeeMenuDAO {
-    @get:Query("SELECT * FROM coffee_menu ORDER BY _id DESC")
-    val getAllCoffeeList:List<CoffeeDetailsItem>
-    @Query("SELECT * FROM coffee_menu WHERE coffee_title =:title")
-    fun getCoffeeDetailsByName(title:String):CoffeeDetailsItem
+    // hot coffee table
+    @get:Query("SELECT * FROM hot_coffee_menu ORDER BY _id DESC")
+    val getHotAllCoffeeList:List<HotCoffeeDetailsItem>
+    @Query("SELECT * FROM hot_coffee_menu WHERE coffee_title =:title")
+    fun getHotCoffeeDetailsByName(title:String):HotCoffeeDetailsItem
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCoffeeMenuItem(coffeeItem: CoffeeDetailsItem)
-    @Query("DELETE  FROM coffee_menu")
-    suspend fun clearCoffeeMenuDatabase()
+    suspend fun insertHotCoffeeMenuItem(coffeeItem: HotCoffeeDetailsItem)
+    @Query("DELETE  FROM hot_coffee_menu")
+    suspend fun clearHotCoffeeMenuDatabase()
+
+    // iced coffee table
+    @get:Query("SELECT * FROM iced_coffee_menu ORDER BY _id DESC")
+    val getAllIcedCoffeeList:List<IcedCoffeeDetailsItem>
+    @Query("SELECT * FROM iced_coffee_menu WHERE coffee_title =:title")
+    fun getIcedCoffeeDetailsByName(title:String):IcedCoffeeDetailsItem
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertIcedCoffeeMenuItem(coffeeItem: IcedCoffeeDetailsItem)
+    @Query("DELETE  FROM iced_coffee_menu")
+    suspend fun clearIcedCoffeeMenuDatabase()
 }

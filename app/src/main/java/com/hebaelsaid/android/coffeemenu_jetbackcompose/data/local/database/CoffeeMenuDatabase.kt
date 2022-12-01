@@ -5,9 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.local.dao.CoffeeMenuDAO
-import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.local.entities.CoffeeDetailsItem
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.local.entities.HotCoffeeDetailsItem
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.local.entities.IcedCoffeeDetailsItem
 
-@Database(entities = [CoffeeDetailsItem::class],
+@Database(entities = [HotCoffeeDetailsItem::class,IcedCoffeeDetailsItem::class],
     version = 1 , exportSchema = false)
 abstract class CoffeeMenuDatabase  : RoomDatabase() {
     companion object{

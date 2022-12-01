@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "coffee_menu")
-data class CoffeeDetailsItem(
+@Entity(tableName = "iced_coffee_menu")
+data class IcedCoffeeDetailsItem(
     @PrimaryKey(autoGenerate = true)
     var _id:Int?=null,
     @ColumnInfo(name = "coffee_description")
