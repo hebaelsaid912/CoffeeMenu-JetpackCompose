@@ -1,8 +1,6 @@
 package com.hebaelsaid.android.coffeemenu_jetbackcompose.data.local.database
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.local.dao.CoffeeMenuDAO
@@ -14,7 +12,7 @@ import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.local.entities.TheT
 @Database(entities = [HotCoffeeDetailsItem::class,IcedCoffeeDetailsItem::class],
     version = 1 , exportSchema = false)
 abstract class CoffeeMenuDatabase  : RoomDatabase() {
-    companion object{
+    /*companion object{
         var coffeeMenuDatabase: CoffeeMenuDatabase? = null
 
         @Synchronized
@@ -29,6 +27,6 @@ abstract class CoffeeMenuDatabase  : RoomDatabase() {
             return coffeeMenuDatabase!!
         }
 
-    }
+    }*/
     abstract fun coffeeMenuDao(): CoffeeMenuDAO
 }
