@@ -1,6 +1,5 @@
 package com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.home.component
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.CircularProgressIndicator
@@ -10,12 +9,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.hebaelsaid.android.coffeemenu_jetbackcompose.R
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.Screen
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.home.viewmodel.IcedCoffeeListViewModel
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.utils.connectivityStatus
@@ -59,13 +56,25 @@ fun IcedCoffeeScreen(
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
         }else{
-            Column(
+           /* Column(
                 Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
                 Image(painter = painterResource(id = R.drawable.network) , contentDescription = "no internet connection")
                 Text(text = "No Internet Connection!")
+            }*/
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(10.dp)
+            ) {
+                items(state.modelItem.size) { coffeeModels ->
+                    CoffeeListItem(model = state.modelItem[coffeeModels], onItemClick = {model ->
+                        navController.navigate(Screen.OnBoardingScreen.route + "/${Screen.CoffeeDetailsScreen.route}"+"/${model.title}"+"/iced")
+                    })
+                    Divider()
+                }
             }
         }
     }

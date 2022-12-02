@@ -11,8 +11,10 @@ import com.hebaelsaid.android.coffeemenu_jetbackcompose.domain.usecase.coffeelis
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.home.state.CoffeeListState
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -41,11 +43,38 @@ class IcedCoffeeListViewModel @Inject constructor(
                     _state.value = CoffeeListState(isLoading = true)
                 }
                 is Resource.Error ->{
-                    _state.value = CoffeeListState(error = resultState.message?: "un expected error occurred")
+                    if(resultState.message!!.contains("internet")){
+                        val coffeeList = withContext(Dispatchers.Default){ coffeeMenuDatabase.coffeeMenuDao().getAllIcedCoffeeList}
+                        _state.value = CoffeeListState(modelItem = getIcedCoffeeListItemsFromDB(coffeeList))
+                    }else {
+                        _state.value = CoffeeListState(
+                            error = resultState.message ?: "un expected error occurred"
+                        )
+                    }
+
                 }
             }
         }.launchIn(viewModelScope)
     }
+
+    private fun getIcedCoffeeListItemsFromDB(coffeeList: List<IcedCoffeeDetailsItem>) : CoffeeResponseModel{
+        // val list = ArrayList<CoffeeResponseModel.CoffeeResponseModelItem>()
+        val list = CoffeeResponseModel()
+        for (item in coffeeList) {
+            list.add(
+                CoffeeResponseModel.CoffeeResponseModelItem(
+                    id = item.item_id,
+                    description = item.description,
+                    image = item.image,
+                    ingredients = item.ingredients,
+                    title = item.title
+                )
+            )
+        }
+        list.reverse()
+        return list
+    }
+
     private suspend fun insertIcedListItemsIntoDB(data: CoffeeResponseModel) {
         clearIcedCoffeeTable()
         for (item in data) {
