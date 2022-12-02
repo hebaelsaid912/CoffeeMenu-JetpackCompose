@@ -2,14 +2,12 @@ package com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.details.com
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -23,6 +21,8 @@ import coil.size.Scale
 import com.google.accompanist.flowlayout.FlowRow
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.R
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.details.viewmodel.CoffeeDetailsViewModel
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.Brown40
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.BrownGrey40
 
 
 @Composable
@@ -33,7 +33,7 @@ fun CoffeeDetailsScreen(
     val state = viewModel.state.value
     Box(modifier = Modifier.fillMaxSize()) {
         if (state.modelItem != null) {
-            Box(modifier = Modifier.fillMaxSize()) {
+            Column(modifier = Modifier.fillMaxSize()) {
                 AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(state.modelItem.image)
@@ -46,10 +46,10 @@ fun CoffeeDetailsScreen(
                     contentDescription = state.modelItem.title,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(150.dp)
-                        .clip(
+                        .height(250.dp)
+                        /*.clip(
                             RoundedCornerShape(10.dp)
-                        )
+                        )*/
                 )
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
@@ -61,6 +61,7 @@ fun CoffeeDetailsScreen(
                             style = MaterialTheme.typography.h4,
                             fontWeight = FontWeight.ExtraBold,
                             fontSize = 20.sp,
+                            color = Brown40 ,
                             modifier = Modifier.fillMaxWidth()
                         )
 
@@ -69,11 +70,13 @@ fun CoffeeDetailsScreen(
                             text = state.modelItem.description!!,
                             style = MaterialTheme.typography.body2,
                             fontWeight = FontWeight.Light,
-                            fontSize = 20.sp,
+                            color = BrownGrey40,
+                            fontSize = 18.sp,
                         )
                         Spacer(modifier = Modifier.height(15.dp))
                         Text(
                             text = "ingredients",
+                            color = Brown40 ,
                             style = MaterialTheme.typography.h5
                         )
                         Spacer(modifier = Modifier.height(15.dp))
@@ -88,11 +91,6 @@ fun CoffeeDetailsScreen(
                                 }
                             }
                         }
-                        Spacer(modifier = Modifier.height(15.dp))
-                        Text(
-                            text = "Team members",
-                            style = MaterialTheme.typography.h5
-                        )
                         Spacer(modifier = Modifier.height(15.dp))
                     }
                 }

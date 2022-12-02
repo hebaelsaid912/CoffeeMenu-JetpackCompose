@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.Coffee80
 
 @Composable
 fun CoffeeIngredientsItem(
@@ -19,7 +20,7 @@ fun CoffeeIngredientsItem(
         modifier = Modifier
             .border(
                 width = 1.dp,
-                color = MaterialTheme.colors.primary,
+                color = Coffee80,
                 shape = RoundedCornerShape(100.dp)
             )
             .padding(10.dp)
@@ -27,7 +28,7 @@ fun CoffeeIngredientsItem(
     ) {
         Text(
             text = ingredient!!,
-            color = MaterialTheme.colors.primary,
+            color = Coffee80,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.body2
             )
