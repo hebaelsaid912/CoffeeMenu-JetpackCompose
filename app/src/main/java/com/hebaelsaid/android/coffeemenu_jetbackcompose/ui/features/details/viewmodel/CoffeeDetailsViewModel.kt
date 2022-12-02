@@ -6,10 +6,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.model.responsemodel.CoffeeResponseModel
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.domain.usecase.coffeedetails.GetCoffeeDetailsUseCase
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.details.state.CoffeeDetailsState
-import com.hebaelsaid.android.coffeemenu_jetbackcompose.utils.Constant.PARAM_COFFEE_MODEL
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.utils.Constant.PARAM_COFFEE_TITLE
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -26,23 +25,23 @@ class CoffeeDetailsViewModel @Inject constructor(
     val state: State<CoffeeDetailsState> = _state
     init {
         Log.d(TAG, "CoffeeDetailsViewModel:init: ")
-            stateHandle.get<CoffeeResponseModel.CoffeeResponseModelItem>(PARAM_COFFEE_MODEL)?.let { coffeeModel ->
+            stateHandle.get<String>(PARAM_COFFEE_TITLE)?.let { title ->
                 Log.d(TAG, "CoffeeDetailsViewModel:init:stateHandle ")
-                getCoffeeDetails(model = coffeeModel)
+                getCoffeeDetails(modelTitle = title, modelType ="hot" )
             }
     }
-    private fun getCoffeeDetails( model: CoffeeResponseModel.CoffeeResponseModelItem){
-         getCoffeeDetailsUseCase(model).onEach { resultState->
+    private fun getCoffeeDetails(modelTitle: String,modelType: String){
+         getCoffeeDetailsUseCase(modelTitle,modelType).onEach { resultState->
              when(resultState){
                  is Resource.Success ->{
                          _state.value = CoffeeDetailsState(modelItem = resultState.data)
                  }
                  is Resource.Loading ->{
-                     Log.d(TAG, "getHotCoffeeList: Resource.Loading: true")
+                     Log.d(TAG, "getCoffeeDetails: Resource.Loading: true")
                      _state.value = CoffeeDetailsState(isLoading = true)
                  }
                  is Resource.Error ->{
-                     Log.d(TAG, "getHotCoffeeList: Resource.Error")
+                     Log.d(TAG, "getCoffeeDetails: Resource.Error")
                      _state.value = CoffeeDetailsState(error = resultState.message?: "un expected error occurred")
                  }
              }

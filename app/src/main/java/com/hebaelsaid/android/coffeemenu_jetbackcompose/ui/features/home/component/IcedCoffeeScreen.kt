@@ -38,8 +38,8 @@ fun IcedCoffeeScreen(
                     .padding(10.dp)
             ) {
                 items(state.modelItem.size) { coffeeModels ->
-                    CoffeeListItem(model = state.modelItem[coffeeModels], onItemClick = {
-                        navController.navigate(Screen.OnBoardingScreen.route + "/${Screen.CoffeeDetailsScreen.route}")
+                    CoffeeListItem(model = state.modelItem[coffeeModels], onItemClick = {model ->
+                        navController.navigate(Screen.OnBoardingScreen.route + "/${Screen.CoffeeDetailsScreen.route}"+"/${model.title}"+"/iced")
                     })
                     Divider()
                 }

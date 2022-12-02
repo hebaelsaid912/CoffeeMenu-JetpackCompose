@@ -15,8 +15,9 @@ import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.details.comp
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.home.component.*
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.onboarding.component.OnBoardingScreen
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.CoffeeMenuJetbackComposeTheme
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.utils.Constant.PARAM_COFFEE_TITLE
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.utils.Constant.PARAM_COFFEE_TYPE
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 private const val TAG = "MainActivity"
 @AndroidEntryPoint
@@ -48,7 +49,7 @@ class MainActivity : ComponentActivity() {
                 Log.d(TAG, "SetupAppRouteNavigation: HomeScreen")
                 HomeScreen(navController)
             }
-            composable(route = Screen.OnBoardingScreen.route + "/${Screen.CoffeeDetailsScreen.route}") { navBackStackEntry ->
+            composable(route = Screen.OnBoardingScreen.route + "/${Screen.CoffeeDetailsScreen.route}" + "/{$PARAM_COFFEE_TITLE}"+ "/{$PARAM_COFFEE_TYPE}") { navBackStackEntry ->
                 Log.d(TAG, "SetupAppRouteNavigation: CoffeeDetailsScreen")
                 CoffeeDetailsScreen()
             }

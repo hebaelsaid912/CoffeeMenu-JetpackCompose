@@ -46,12 +46,8 @@ fun HotCoffeeScreen(
                 Log.d(TAG, "HotCoffeeScreen: state.modelItem.size: ${state.modelItem.size}")
                 items(state.modelItem.size) { coffeeModels ->
                     CoffeeListItem(model = state.modelItem[coffeeModels]) { model ->
-                        Log.d(
-                            TAG,
-                            "HotCoffeeScreen: nav controller: ${navController.currentDestination}"
-                        )
-                        // NavHost(navController = navController, graph = )
-                        navController.navigate(Screen.OnBoardingScreen.route + "/${Screen.CoffeeDetailsScreen.route}")
+                        Log.d(TAG, "HotCoffeeScreen: nav controller: ${navController.currentDestination}")
+                        navController.navigate(Screen.OnBoardingScreen.route + "/${Screen.CoffeeDetailsScreen.route}"+"/${model.title}"+"/hot")
                     }
                     Divider()
                 }

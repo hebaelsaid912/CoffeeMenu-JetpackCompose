@@ -6,5 +6,6 @@ object Constant {
     const val HOME_SCREEN_ROUTE : String = "home_screen"
     const val COFFEE_LIST_SCREEN_ROUTE : String = "coffee_list_screen"
     const val COFFEE_DETAILS_SCREEN_ROUTE : String = "coffee_details_screen"
-    const val PARAM_COFFEE_MODEL : String = "coffee_model"
+    const val PARAM_COFFEE_TITLE : String = "coffee_title"
+    const val PARAM_COFFEE_TYPE : String = "coffee_type"
 }

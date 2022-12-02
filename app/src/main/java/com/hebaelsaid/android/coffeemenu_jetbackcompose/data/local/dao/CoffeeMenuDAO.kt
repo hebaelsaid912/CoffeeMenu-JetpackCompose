@@ -13,7 +13,7 @@ interface CoffeeMenuDAO {
     @get:Query("SELECT * FROM hot_coffee_menu ORDER BY id DESC")
     val getHotAllCoffeeList:List<HotCoffeeDetailsItem>
     @Query("SELECT * FROM hot_coffee_menu WHERE coffee_title =:title")
-    fun getHotCoffeeDetailsByName(title:String):HotCoffeeDetailsItem
+    suspend fun getHotCoffeeDetailsByName(title:String):HotCoffeeDetailsItem
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertHotCoffeeMenuItem(coffeeItem: HotCoffeeDetailsItem)
     @Query("DELETE  FROM hot_coffee_menu")
@@ -23,7 +23,7 @@ interface CoffeeMenuDAO {
     @get:Query("SELECT * FROM iced_coffee_menu ORDER BY id DESC")
     val getAllIcedCoffeeList:List<IcedCoffeeDetailsItem>
     @Query("SELECT * FROM iced_coffee_menu WHERE coffee_title =:title")
-    fun getIcedCoffeeDetailsByName(title:String):IcedCoffeeDetailsItem
+    suspend fun getIcedCoffeeDetailsByName(title:String):IcedCoffeeDetailsItem
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertIcedCoffeeMenuItem(coffeeItem: IcedCoffeeDetailsItem)
     @Query("DELETE  FROM iced_coffee_menu")
