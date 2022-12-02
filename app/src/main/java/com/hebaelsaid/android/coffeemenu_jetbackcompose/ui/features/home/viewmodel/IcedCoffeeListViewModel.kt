@@ -56,7 +56,7 @@ class IcedCoffeeListViewModel @Inject constructor(
                     image = item.image,
                     title = item.title,
                     ingredients = item.ingredients,
-                    type = "hot"
+                    type = "iced"
                 )
             )
         }
