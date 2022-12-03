@@ -10,6 +10,7 @@ import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.local.entities.HotC
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.model.responsemodel.CoffeeResponseModel
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.domain.usecase.coffeelist.GetHotCoffeeListUseCase
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.home.state.CoffeeListState
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.utils.Constant.HOT_COFFEE_TYPE
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -88,7 +89,7 @@ class HotCoffeeListViewModel @Inject constructor(
                         image = item.image,
                         title = item.title,
                         ingredients = item.ingredients,
-                        type = "hot"
+                        type = HOT_COFFEE_TYPE
                     )
             )
         }

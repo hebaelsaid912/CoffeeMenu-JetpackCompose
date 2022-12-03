@@ -9,6 +9,7 @@ import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.local.entities.Iced
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.model.responsemodel.CoffeeResponseModel
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.domain.usecase.coffeelist.GetIcedCoffeeListUseCase
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.features.home.state.CoffeeListState
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.utils.Constant.ICED_COFFEE_TYPE
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -51,7 +52,6 @@ class IcedCoffeeListViewModel @Inject constructor(
                             error = resultState.message ?: "un expected error occurred"
                         )
                     }
-
                 }
             }
         }.launchIn(viewModelScope)
@@ -85,7 +85,7 @@ class IcedCoffeeListViewModel @Inject constructor(
                     image = item.image,
                     title = item.title,
                     ingredients = item.ingredients,
-                    type = "iced"
+                    type = ICED_COFFEE_TYPE
                 )
             )
         }

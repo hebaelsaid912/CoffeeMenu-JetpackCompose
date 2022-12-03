@@ -8,4 +8,6 @@ object Constant {
     const val COFFEE_DETAILS_SCREEN_ROUTE : String = "coffee_details_screen"
     const val PARAM_COFFEE_TITLE : String = "coffee_title"
     const val PARAM_COFFEE_TYPE : String = "coffee_type"
+    const val HOT_COFFEE_TYPE : String = "hot"
+    const val ICED_COFFEE_TYPE : String = "iced"
 }

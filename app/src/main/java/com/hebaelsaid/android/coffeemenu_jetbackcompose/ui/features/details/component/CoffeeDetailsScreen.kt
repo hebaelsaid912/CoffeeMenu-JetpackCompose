@@ -27,7 +27,6 @@ import com.hebaelsaid.android.coffeemenu_jetbackcompose.ui.theme.BrownGrey40
 
 @Composable
 fun CoffeeDetailsScreen(
-    //modelItem: CoffeeResponseModel.CoffeeResponseModelItem,
     viewModel: CoffeeDetailsViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value

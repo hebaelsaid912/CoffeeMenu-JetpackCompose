@@ -2,6 +2,8 @@ package com.hebaelsaid.android.coffeemenu_jetbackcompose.domain.usecase.coffeede
 
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.local.database.CoffeeMenuDatabase
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.data.model.responsemodel.CoffeeResponseModel
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.utils.Constant.HOT_COFFEE_TYPE
+import com.hebaelsaid.android.coffeemenu_jetbackcompose.utils.Constant.ICED_COFFEE_TYPE
 import com.hebaelsaid.android.coffeemenu_jetbackcompose.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
@@ -18,7 +20,7 @@ class GetCoffeeDetailsUseCase @Inject constructor(
             try {
                 emit(Resource.Loading<CoffeeResponseModel.CoffeeResponseModelItem>())
                 when (type) {
-                    "hot" -> {
+                    HOT_COFFEE_TYPE -> {
                         val coffeeModel = withContext(Dispatchers.Default) {
                             coffeeMenuDatabase.coffeeMenuDao().getHotCoffeeDetailsByName(title)
                         }
@@ -34,7 +36,7 @@ class GetCoffeeDetailsUseCase @Inject constructor(
                             )
                         )
                     }
-                    "iced" -> {
+                    ICED_COFFEE_TYPE -> {
                         val coffeeModel = withContext(Dispatchers.Default) {
                             coffeeMenuDatabase.coffeeMenuDao().getIcedCoffeeDetailsByName(title)
                         }
