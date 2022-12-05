@@ -37,12 +37,8 @@ class HotCoffeeListViewModel @Inject constructor(
         getHotCoffeeUseCase().onEach { resultState ->
             when (resultState) {
                 is Resource.Success -> {
-                    if (!resultState.data.isNullOrEmpty()) {
-                        _state.value = CoffeeListState(modelItem = resultState.data)
-                        insertHotListItemsIntoDB(resultState.data)
-                    } else {
-                        _state.value = CoffeeListState(error = "Data Return With Null")
-                    }
+                    _state.value = CoffeeListState(modelItem = resultState.data!!)
+                    insertHotListItemsIntoDB(resultState.data)
                 }
                 is Resource.Loading -> {
                     Log.d(TAG, "getHotCoffeeList: Resource.Loading: true")

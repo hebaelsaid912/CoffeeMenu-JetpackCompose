@@ -15,7 +15,11 @@ class GetIcedCoffeeListUseCase @Inject constructor(
         try {
             emit(Resource.Loading<CoffeeResponseModel>())
             val coffeeResponseModel = repository.getIcedCoffee()
-            emit(Resource.Success<CoffeeResponseModel>(coffeeResponseModel))
+            if (!coffeeResponseModel.isEmpty()) {
+                emit(Resource.Success<CoffeeResponseModel>(data = coffeeResponseModel))
+            }else {
+                emit(Resource.Error<CoffeeResponseModel>( "Data Return With Null"))
+            }
         }catch (e: HttpException){
             emit(Resource.Error<CoffeeResponseModel>(e.localizedMessage?: "An unexpected error occurred"))
         }catch (e: IOException){
