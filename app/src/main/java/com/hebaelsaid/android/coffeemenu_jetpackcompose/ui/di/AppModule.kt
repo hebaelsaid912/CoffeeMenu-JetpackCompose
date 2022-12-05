@@ -4,12 +4,12 @@ import android.content.Context
 import androidx.room.Room
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.local.database.CoffeeMenuDatabase
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.remote.CoffeeApiInterface
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.CoffeeRepositoryImpl
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.CoffeeApiRepositoryImpl
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.HotCoffeeDBRepositoryImpl
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.IcedCoffeeDBRepositoryImpl
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.CoffeeHotDaoRepoImpl
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.CoffeeIcedDaoRepoImpl
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.CoffeeRepoImpl
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.CoffeeApiRepoImpl
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.utils.Constant.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -45,8 +45,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCoffeeRepository(api: CoffeeApiInterface): CoffeeRepoImpl {
-        return CoffeeRepositoryImpl(api = api)
+    fun provideCoffeeRepository(api: CoffeeApiInterface): CoffeeApiRepoImpl {
+        return CoffeeApiRepositoryImpl(api = api)
     }
     @Provides
     @Singleton
