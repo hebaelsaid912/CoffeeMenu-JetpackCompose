@@ -29,14 +29,14 @@ class CoffeeDetailsViewModel @Inject constructor(
         Log.d(TAG, "CoffeeDetailsViewModel:init: ")
         stateHandle.get<String>(PARAM_COFFEE_TITLE)?.let { data ->
             Log.d(TAG, "CoffeeDetailsViewModel:init:stateHandle ")
-            val title = data.split('-')[0]
+            val id = data.split('-')[0].toInt()
             val type = data.split('-')[1]
-            getCoffeeDetails(modelTitle = title, modelType = type)
+            getCoffeeDetails(modelId = id, modelType = type)
         }
     }
 
-    private fun getCoffeeDetails(modelTitle: String, modelType: String) {
-        getCoffeeDetailsUseCase(modelTitle, modelType).onEach { resultState ->
+    private fun getCoffeeDetails(modelId: Int, modelType: String) {
+        getCoffeeDetailsUseCase(modelId, modelType).onEach { resultState ->
             when (resultState) {
                 is Resource.Success -> {
                     _state.value = CoffeeDetailsState(modelItem = resultState.data)

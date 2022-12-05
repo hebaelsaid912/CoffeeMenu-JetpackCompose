@@ -15,14 +15,14 @@ import javax.inject.Inject
 class GetCoffeeDetailsUseCase @Inject constructor(
     private val coffeeMenuDatabase: CoffeeMenuDatabase
 ) {
-    operator fun invoke(title: String, type: String) =
+    operator fun invoke(id: Int, type: String) =
         flow<Resource<CoffeeResponseModel.CoffeeResponseModelItem>> {
             try {
                 emit(Resource.Loading<CoffeeResponseModel.CoffeeResponseModelItem>())
                 when (type) {
                     HOT_COFFEE_TYPE -> {
                         val coffeeModel = withContext(Dispatchers.Default) {
-                            coffeeMenuDatabase.coffeeMenuDao().getHotCoffeeDetailsByName(title)
+                            coffeeMenuDatabase.coffeeMenuDao().getHotCoffeeDetailsByName(id = id)
                         }
                         emit(
                             Resource.Success<CoffeeResponseModel.CoffeeResponseModelItem>(
@@ -38,7 +38,7 @@ class GetCoffeeDetailsUseCase @Inject constructor(
                     }
                     ICED_COFFEE_TYPE -> {
                         val coffeeModel = withContext(Dispatchers.Default) {
-                            coffeeMenuDatabase.coffeeMenuDao().getIcedCoffeeDetailsByName(title)
+                            coffeeMenuDatabase.coffeeMenuDao().getIcedCoffeeDetailsByName(id)
                         }
                         emit(
                             Resource.Success<CoffeeResponseModel.CoffeeResponseModelItem>(

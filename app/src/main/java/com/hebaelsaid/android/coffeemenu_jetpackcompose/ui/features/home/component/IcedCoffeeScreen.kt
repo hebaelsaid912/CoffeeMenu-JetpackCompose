@@ -79,7 +79,7 @@ private fun SetupCoffeeListUi(
             CoffeeListItem(
                 model = state.modelItem[coffeeModels],
                 onItemClick = { model ->
-                    navController.navigate(Screen.OnBoardingScreen.route + "/${Screen.CoffeeDetailsScreen.route}" + "/${model.title}-$ICED_COFFEE_TYPE")
+                    navController.navigate(Screen.OnBoardingScreen.route + "/${Screen.CoffeeDetailsScreen.route}" + "/${model.id}-$ICED_COFFEE_TYPE")
                 })
             Divider()
         }

@@ -101,7 +101,7 @@ private fun SetupCoffeeListUi(
                     TAG,
                     "HotCoffeeScreen: nav controller: ${navController.currentDestination}"
                 )
-                navController.navigate(Screen.OnBoardingScreen.route + "/${Screen.CoffeeDetailsScreen.route}" + "/${model.title}-$HOT_COFFEE_TYPE")
+                navController.navigate(Screen.OnBoardingScreen.route + "/${Screen.CoffeeDetailsScreen.route}" + "/${model.id}-$HOT_COFFEE_TYPE")
             }
             Divider()
         }
