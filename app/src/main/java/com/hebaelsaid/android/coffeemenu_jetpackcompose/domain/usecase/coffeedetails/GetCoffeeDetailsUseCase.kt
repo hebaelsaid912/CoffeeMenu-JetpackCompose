@@ -1,8 +1,8 @@
 package com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.usecase.coffeedetails
 
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.model.responsemodel.CoffeeResponseModel
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.HotCoffeeDBRepositoryImpl
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.IcedCoffeeDBRepositoryImpl
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.HotCoffeeDBRepoImpl
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.IcedCoffeeDBRepoImpl
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.utils.Constant.HOT_COFFEE_TYPE
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.utils.Constant.ICED_COFFEE_TYPE
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.utils.Resource
@@ -14,8 +14,8 @@ import java.io.IOException
 import javax.inject.Inject
 
 class GetCoffeeDetailsUseCase @Inject constructor(
-    private val hotCoffeeDBRepositoryImpl: HotCoffeeDBRepositoryImpl,
-    private val icedCoffeeDBRepositoryImpl: IcedCoffeeDBRepositoryImpl
+    private val hotCoffeeDBRepositoryImpl: HotCoffeeDBRepoImpl,
+    private val icedCoffeeDBRepositoryImpl: IcedCoffeeDBRepoImpl
 ) {
     operator fun invoke(id: Int, type: String) =
         flow<Resource<CoffeeResponseModel.CoffeeResponseModelItem>> {

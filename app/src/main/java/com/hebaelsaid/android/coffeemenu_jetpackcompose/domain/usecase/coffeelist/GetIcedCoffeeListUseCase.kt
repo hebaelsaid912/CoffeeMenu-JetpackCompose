@@ -1,7 +1,7 @@
 package com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.usecase.coffeelist
 
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.model.responsemodel.CoffeeResponseModel
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.CoffeeApiRepoImpl
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.CoffeeApiRepo
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.utils.Resource
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
@@ -9,7 +9,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 class GetIcedCoffeeListUseCase @Inject constructor(
-    private val repository: CoffeeApiRepoImpl
+    private val repository: CoffeeApiRepo
 ){
     operator fun invoke() = flow<Resource<CoffeeResponseModel>> {
         try {

@@ -4,12 +4,12 @@ import android.content.Context
 import androidx.room.Room
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.local.database.CoffeeMenuDatabase
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.remote.CoffeeApiInterface
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.CoffeeApiRepositoryImpl
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.HotCoffeeDBRepositoryImpl
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.IcedCoffeeDBRepositoryImpl
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.CoffeeHotDaoRepoImpl
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.CoffeeIcedDaoRepoImpl
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.CoffeeApiRepoImpl
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.CoffeeApiRepoImpl
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.HotCoffeeDBRepoImpl
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.IcedCoffeeDBRepoImpl
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.CoffeeHotDaoRepo
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.CoffeeIcedDaoRepo
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.CoffeeApiRepo
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.utils.Constant.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -45,17 +45,17 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCoffeeRepository(api: CoffeeApiInterface): CoffeeApiRepoImpl {
-        return CoffeeApiRepositoryImpl(api = api)
+    fun provideCoffeeRepository(api: CoffeeApiInterface): CoffeeApiRepo {
+        return CoffeeApiRepoImpl(api = api)
     }
     @Provides
     @Singleton
-    fun provideCoffeeHotDaoRepository(coffeeMenuDatabase: CoffeeMenuDatabase): CoffeeHotDaoRepoImpl {
-        return HotCoffeeDBRepositoryImpl(coffeeMenuDatabase)
+    fun provideCoffeeHotDaoRepository(coffeeMenuDatabase: CoffeeMenuDatabase): CoffeeHotDaoRepo {
+        return HotCoffeeDBRepoImpl(coffeeMenuDatabase)
     }
     @Provides
     @Singleton
-    fun provideCoffeeIcedDaoRepository(coffeeMenuDatabase: CoffeeMenuDatabase): CoffeeIcedDaoRepoImpl {
-        return IcedCoffeeDBRepositoryImpl(coffeeMenuDatabase)
+    fun provideCoffeeIcedDaoRepository(coffeeMenuDatabase: CoffeeMenuDatabase): CoffeeIcedDaoRepo {
+        return IcedCoffeeDBRepoImpl(coffeeMenuDatabase)
     }
 }

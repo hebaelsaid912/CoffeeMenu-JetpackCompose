@@ -2,12 +2,12 @@ package com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository
 
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.local.database.CoffeeMenuDatabase
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.local.entities.HotCoffeeDetailsItem
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.CoffeeHotDaoRepoImpl
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.CoffeeHotDaoRepo
 import javax.inject.Inject
 
-class HotCoffeeDBRepositoryImpl @Inject constructor(
+class HotCoffeeDBRepoImpl @Inject constructor(
     private val coffeeMenuDatabase: CoffeeMenuDatabase
-): CoffeeHotDaoRepoImpl {
+): CoffeeHotDaoRepo {
     override suspend fun getHotAllCoffeeList(): List<HotCoffeeDetailsItem> {
         return coffeeMenuDatabase.coffeeMenuDao().getHotAllCoffeeList
     }
