@@ -28,12 +28,10 @@ import com.hebaelsaid.android.coffeemenu_jetpackcompose.R
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.model.uimodel.OnBoardingUiModel
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.Screen
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.theme.*
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 private const val TAG = "OnBoardingScreen"
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun OnBoardingScreen(navController: NavController) {
     val pagerState = rememberPagerState()
@@ -76,7 +74,6 @@ private fun setupOnBoardingUiModels(): ArrayList<OnBoardingUiModel> {
     return items
 }
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun OnBoardingPager(
     navController: NavController,
@@ -183,7 +180,6 @@ fun Indicator(isSelected: Boolean, color: Color) {
     )
 }
 
-@OptIn(ExperimentalPagerApi::class, DelicateCoroutinesApi::class)
 @Composable
 fun SetupNextButton(navController: NavController, pagerState: PagerState) {
     Log.d(TAG, "SetupNextButton: pagerState.currentPage: ${pagerState.currentPage} ")

@@ -33,7 +33,6 @@ fun HomeScreen(navController: NavController) {
     MainContent(navController)
 }
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun MainContent(navController: NavController) {
     val list = listOf(TabItem.HotCoffee,TabItem.IcedCoffee)
@@ -50,7 +49,6 @@ fun MainContent(navController: NavController) {
         TabsContent(navController,tabs = list, pagerState = pagerState)
     }
 }
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 private fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
     val scope = rememberCoroutineScope()
@@ -114,7 +112,6 @@ private fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
 
 }
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 private fun TabsContent(navController: NavController, tabs: List<TabItem>, pagerState: PagerState) {
     HorizontalPager(count = tabs.size, state = pagerState) { page ->

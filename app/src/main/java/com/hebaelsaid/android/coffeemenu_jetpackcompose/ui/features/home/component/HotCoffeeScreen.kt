@@ -23,11 +23,9 @@ import com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.features.home.state.C
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.features.home.viewmodel.HotCoffeeListViewModel
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.utils.Constant.HOT_COFFEE_TYPE
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.utils.connectivityStatus
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 private const val TAG = "HotCoffeeScreen"
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun HotCoffeeScreen(
     navController: NavController,

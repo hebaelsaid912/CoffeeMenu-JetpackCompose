@@ -22,9 +22,7 @@ import com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.features.home.state.C
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.features.home.viewmodel.IcedCoffeeListViewModel
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.utils.Constant.ICED_COFFEE_TYPE
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.utils.connectivityStatus
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun IcedCoffeeScreen(
     navController: NavController,

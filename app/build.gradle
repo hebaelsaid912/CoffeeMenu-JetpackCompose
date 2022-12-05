@@ -37,7 +37,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs += [
+                "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-Xopt-in=kotlinx.coroutines.DelicateCoroutinesApi",
+                "-Xopt-in=com.google.accompanist.pager.ExperimentalPagerApi"
 
+        ]
     }
     buildFeatures {
         compose true
