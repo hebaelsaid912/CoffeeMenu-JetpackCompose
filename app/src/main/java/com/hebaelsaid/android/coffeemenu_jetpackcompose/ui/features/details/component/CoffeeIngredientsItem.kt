@@ -31,6 +31,6 @@ fun CoffeeIngredientsItem(
             color = Coffee80,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.body2
-            )
+        )
     }
 }

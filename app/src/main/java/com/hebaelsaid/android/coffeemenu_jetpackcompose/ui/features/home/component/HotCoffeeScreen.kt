@@ -2,7 +2,12 @@ package com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.features.home.compon
 
 import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
@@ -37,8 +42,8 @@ fun HotCoffeeScreen(
             .fillMaxSize()
             .padding(15.dp)
     ) {
-        if(connectivityStatus()) {
-           SetupCoffeeListUi(state = state, navController = navController)
+        if (connectivityStatus()) {
+            SetupCoffeeListUi(state = state, navController = navController)
             if (state.error.isNotBlank()) {
                 Text(
                     text = state.error,
@@ -53,10 +58,10 @@ fun HotCoffeeScreen(
             if (state.isLoading) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
-        }else{
-            if(state.modelItem.isNotEmpty()) {
+        } else {
+            if (state.modelItem.isNotEmpty()) {
                 SetupCoffeeListUi(state, navController)
-            }else{
+            } else {
                 SetupOfflineUi()
             }
         }

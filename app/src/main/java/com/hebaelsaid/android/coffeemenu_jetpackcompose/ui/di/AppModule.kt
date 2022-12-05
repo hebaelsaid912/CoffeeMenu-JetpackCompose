@@ -1,6 +1,5 @@
 package com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.di
 
-
 import android.content.Context
 import androidx.room.Room
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.local.database.CoffeeMenuDatabase
@@ -21,7 +20,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule  {
+object AppModule {
 
     @Provides
     @Singleton
@@ -32,11 +31,14 @@ object AppModule  {
             .build()
             .create(CoffeeApiInterface::class.java)
     }
+
     @Provides
     @Singleton
     fun provideCoffeeDatabase(@ApplicationContext appContext: Context): CoffeeMenuDatabase {
-        return Room.databaseBuilder(appContext, CoffeeMenuDatabase::class.java,
-            "coffee_menu.db").build()
+        return Room.databaseBuilder(
+            appContext, CoffeeMenuDatabase::class.java,
+            "coffee_menu.db"
+        ).build()
     }
 
     @Provides
@@ -44,6 +46,7 @@ object AppModule  {
     fun provideCoffeeRepository(api: CoffeeApiInterface): CoffeeRepoImpl {
         return CoffeeRepositoryImpl(api = api)
     }
+
     @Provides
     @Singleton
     fun provideCoffeeDetailsRepository(): CoffeeDetailsRemoImpl {

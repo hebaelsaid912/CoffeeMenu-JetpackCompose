@@ -2,7 +2,11 @@ package com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.features.home.compon
 
 import androidx.compose.animation.Animatable
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
@@ -21,7 +25,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.google.accompanist.pager.*
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.PagerState
+import com.google.accompanist.pager.pagerTabIndicatorOffset
+import com.google.accompanist.pager.rememberPagerState
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.theme.Brown40
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.theme.BrownGrey40
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.theme.Coffee80
@@ -35,20 +42,21 @@ fun HomeScreen(navController: NavController) {
 
 @Composable
 fun MainContent(navController: NavController) {
-    val list = listOf(TabItem.HotCoffee,TabItem.IcedCoffee)
+    val list = listOf(TabItem.HotCoffee, TabItem.IcedCoffee)
     val pagerState = rememberPagerState()
     Column(modifier = Modifier.fillMaxSize()) {
         Text(
             text = "Coffee Menu",
             color = Brown40,
             fontSize = 25.sp,
-            modifier = Modifier.padding(10.dp,20.dp),
+            modifier = Modifier.padding(10.dp, 20.dp),
             fontWeight = FontWeight.Bold
         )
         Tabs(tabs = list, pagerState = pagerState)
-        TabsContent(navController,tabs = list, pagerState = pagerState)
+        TabsContent(navController, tabs = list, pagerState = pagerState)
     }
 }
+
 @Composable
 private fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
     val scope = rememberCoroutineScope()
@@ -87,7 +95,7 @@ private fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
                 },
                 text = {
                     Text(
-                       textAlign = TextAlign.Center,
+                        textAlign = TextAlign.Center,
                         text = tabItem.title,
                         style = if (pagerState.currentPage == index)
                             TextStyle(
@@ -115,7 +123,7 @@ private fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
 @Composable
 private fun TabsContent(navController: NavController, tabs: List<TabItem>, pagerState: PagerState) {
     HorizontalPager(count = tabs.size, state = pagerState) { page ->
-        when(tabs[page].title){
+        when (tabs[page].title) {
             "Hot" -> {
                 HotCoffeeScreen(navController = navController)
             }

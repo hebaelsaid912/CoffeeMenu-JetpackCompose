@@ -16,37 +16,42 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 private const val TAG = "CoffeeDetailsViewModel"
+
 @HiltViewModel
 class CoffeeDetailsViewModel @Inject constructor(
     private val getCoffeeDetailsUseCase: GetCoffeeDetailsUseCase,
     stateHandle: SavedStateHandle
-): ViewModel(){
-    private val _state  = mutableStateOf(CoffeeDetailsState())
+) : ViewModel() {
+    private val _state = mutableStateOf(CoffeeDetailsState())
     val state: State<CoffeeDetailsState> = _state
+
     init {
         Log.d(TAG, "CoffeeDetailsViewModel:init: ")
-            stateHandle.get<String>(PARAM_COFFEE_TITLE)?.let { data ->
-                Log.d(TAG, "CoffeeDetailsViewModel:init:stateHandle ")
-                val title = data.split('-')[0]
-                val type = data.split('-')[1]
-                getCoffeeDetails(modelTitle = title, modelType =type )
-            }
+        stateHandle.get<String>(PARAM_COFFEE_TITLE)?.let { data ->
+            Log.d(TAG, "CoffeeDetailsViewModel:init:stateHandle ")
+            val title = data.split('-')[0]
+            val type = data.split('-')[1]
+            getCoffeeDetails(modelTitle = title, modelType = type)
+        }
     }
-    private fun getCoffeeDetails(modelTitle: String,modelType: String){
-         getCoffeeDetailsUseCase(modelTitle,modelType).onEach { resultState->
-             when(resultState){
-                 is Resource.Success ->{
-                     _state.value = CoffeeDetailsState(modelItem = resultState.data)
-                 }
-                 is Resource.Loading ->{
-                     Log.d(TAG, "getCoffeeDetails: Resource.Loading: true")
-                     _state.value = CoffeeDetailsState(isLoading = true)
-                 }
-                 is Resource.Error ->{
-                     Log.d(TAG, "getCoffeeDetails: Resource.Error")
-                     _state.value = CoffeeDetailsState(error = resultState.message?: "un expected error occurred")
-                 }
-             }
-         }.launchIn(viewModelScope)
+
+    private fun getCoffeeDetails(modelTitle: String, modelType: String) {
+        getCoffeeDetailsUseCase(modelTitle, modelType).onEach { resultState ->
+            when (resultState) {
+                is Resource.Success -> {
+                    _state.value = CoffeeDetailsState(modelItem = resultState.data)
+                }
+                is Resource.Loading -> {
+                    Log.d(TAG, "getCoffeeDetails: Resource.Loading: true")
+                    _state.value = CoffeeDetailsState(isLoading = true)
+                }
+                is Resource.Error -> {
+                    Log.d(TAG, "getCoffeeDetails: Resource.Error")
+                    _state.value = CoffeeDetailsState(
+                        error = resultState.message ?: "un expected error occurred"
+                    )
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 }

@@ -20,40 +20,44 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 private const val TAG = "HotCoffeeListViewModel"
+
 @HiltViewModel
 class HotCoffeeListViewModel @Inject constructor(
     private val getHotCoffeeUseCase: GetHotCoffeeListUseCase,
     private val coffeeMenuDatabase: CoffeeMenuDatabase
-): ViewModel(){
-    private val _state  = mutableStateOf(CoffeeListState())
+) : ViewModel() {
+    private val _state = mutableStateOf(CoffeeListState())
     val state: State<CoffeeListState> = _state
 
     init {
         getHotCoffeeList()
     }
-    private fun getHotCoffeeList(){
-        getHotCoffeeUseCase().onEach { resultState->
-            when(resultState){
-                is Resource.Success ->{
-                    if(!resultState.data.isNullOrEmpty()) {
+
+    private fun getHotCoffeeList() {
+        getHotCoffeeUseCase().onEach { resultState ->
+            when (resultState) {
+                is Resource.Success -> {
+                    if (!resultState.data.isNullOrEmpty()) {
                         _state.value = CoffeeListState(modelItem = resultState.data)
                         insertHotListItemsIntoDB(resultState.data)
-                    }else{
-                        _state.value = CoffeeListState(error ="Data Return With Null")
+                    } else {
+                        _state.value = CoffeeListState(error = "Data Return With Null")
                     }
                 }
-                is Resource.Loading ->{
+                is Resource.Loading -> {
                     Log.d(TAG, "getHotCoffeeList: Resource.Loading: true")
                     _state.value = CoffeeListState(isLoading = true)
                 }
-                is Resource.Error ->{
+                is Resource.Error -> {
                     Log.d(TAG, "getHotCoffeeList: Resource.Error")
-                    if(resultState.message!!.contains("internet")){
-                        val coffeeList = withContext(Dispatchers.Default){ coffeeMenuDatabase.coffeeMenuDao().getHotAllCoffeeList}
-                        _state.value = CoffeeListState(modelItem = getHotCoffeeListItemsFromDB(coffeeList))
-                    }else {
+                    if (resultState.message!!.contains("internet")) {
+                        val coffeeList =
+                            withContext(Dispatchers.Default) { coffeeMenuDatabase.coffeeMenuDao().getHotAllCoffeeList }
+                        _state.value =
+                            CoffeeListState(modelItem = getHotCoffeeListItemsFromDB(coffeeList))
+                    } else {
                         _state.value = CoffeeListState(
-                            error = resultState.message ?: "un expected error occurred"
+                            error = resultState.message
                         )
                     }
                 }
@@ -61,8 +65,8 @@ class HotCoffeeListViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private fun getHotCoffeeListItemsFromDB(coffeeList: List<HotCoffeeDetailsItem>) : CoffeeResponseModel{
-       // val list = ArrayList<CoffeeResponseModel.CoffeeResponseModelItem>()
+    private fun getHotCoffeeListItemsFromDB(coffeeList: List<HotCoffeeDetailsItem>): CoffeeResponseModel {
+        // val list = ArrayList<CoffeeResponseModel.CoffeeResponseModelItem>()
         val list = CoffeeResponseModel()
         for (item in coffeeList) {
             list.add(
@@ -83,14 +87,14 @@ class HotCoffeeListViewModel @Inject constructor(
         clearHotCoffeeTable()
         for (item in data) {
             coffeeMenuDatabase.coffeeMenuDao().insertHotCoffeeMenuItem(
-                    HotCoffeeDetailsItem(
-                        description = item.description,
-                        item_id = item.id,
-                        image = item.image,
-                        title = item.title,
-                        ingredients = item.ingredients,
-                        type = HOT_COFFEE_TYPE
-                    )
+                HotCoffeeDetailsItem(
+                    description = item.description,
+                    item_id = item.id,
+                    image = item.image,
+                    title = item.title,
+                    ingredients = item.ingredients,
+                    type = HOT_COFFEE_TYPE
+                )
             )
         }
     }

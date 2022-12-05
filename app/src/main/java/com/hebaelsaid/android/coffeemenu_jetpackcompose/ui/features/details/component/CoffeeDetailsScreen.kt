@@ -1,6 +1,13 @@
 package com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.features.details.component
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -46,9 +53,9 @@ fun CoffeeDetailsScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(250.dp)
-                        /*.clip(
-                            RoundedCornerShape(10.dp)
-                        )*/
+                    /*.clip(
+                        RoundedCornerShape(10.dp)
+                    )*/
                 )
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
@@ -60,7 +67,7 @@ fun CoffeeDetailsScreen(
                             style = MaterialTheme.typography.h4,
                             fontWeight = FontWeight.ExtraBold,
                             fontSize = 20.sp,
-                            color = Brown40 ,
+                            color = Brown40,
                             modifier = Modifier.fillMaxWidth()
                         )
 
@@ -75,7 +82,7 @@ fun CoffeeDetailsScreen(
                         Spacer(modifier = Modifier.height(15.dp))
                         Text(
                             text = "ingredients",
-                            color = Brown40 ,
+                            color = Brown40,
                             style = MaterialTheme.typography.h5
                         )
                         Spacer(modifier = Modifier.height(15.dp))

@@ -5,10 +5,26 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedButton
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,22 +39,28 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.google.accompanist.pager.*
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.PagerState
+import com.google.accompanist.pager.rememberPagerState
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.R
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.model.uimodel.OnBoardingUiModel
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.Screen
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.theme.*
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.theme.Brown40
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.theme.BrownGrey40
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.theme.CoffeeGrey80
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.ui.theme.transCoffee
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 private const val TAG = "OnBoardingScreen"
+
 @Composable
 fun OnBoardingScreen(navController: NavController) {
     val pagerState = rememberPagerState()
     val items = setupOnBoardingUiModels()
     Column(modifier = Modifier.fillMaxSize()) {
         //  OnBoardingPager(item = items, pagerState = pagerState)
-        OnBoardingPager(navController,items, pagerState)
+        OnBoardingPager(navController, items, pagerState)
     }
 }
 
@@ -187,12 +209,15 @@ fun SetupNextButton(navController: NavController, pagerState: PagerState) {
         OutlinedButton(
             onClick = {
                 GlobalScope.launch {
-                    Log.d(TAG, "SetupNextButton: pagerState.currentPage on click: ${pagerState.currentPage} ")
+                    Log.d(
+                        TAG,
+                        "SetupNextButton: pagerState.currentPage on click: ${pagerState.currentPage} "
+                    )
                     pagerState.scrollToPage(
                         pagerState.currentPage + 1,
                         pageOffset = 0f
                     )
-                 //   delay(500)
+                    //   delay(500)
                 }
             },
             border = BorderStroke(

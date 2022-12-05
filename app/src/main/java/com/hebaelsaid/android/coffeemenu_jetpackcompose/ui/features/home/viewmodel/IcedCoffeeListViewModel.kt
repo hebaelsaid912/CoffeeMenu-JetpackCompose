@@ -22,34 +22,37 @@ import javax.inject.Inject
 class IcedCoffeeListViewModel @Inject constructor(
     private val getIcedCoffeeUseCase: GetIcedCoffeeListUseCase,
     private val coffeeMenuDatabase: CoffeeMenuDatabase
-): ViewModel(){
-    private val _state  = mutableStateOf(CoffeeListState())
+) : ViewModel() {
+    private val _state = mutableStateOf(CoffeeListState())
     val state: State<CoffeeListState> = _state
 
     init {
         getIcedCoffeeList()
     }
-    private fun getIcedCoffeeList(){
-        getIcedCoffeeUseCase().onEach { resultState->
-            when(resultState){
-                is Resource.Success ->{
-                    if(!resultState.data.isNullOrEmpty()) {
+
+    private fun getIcedCoffeeList() {
+        getIcedCoffeeUseCase().onEach { resultState ->
+            when (resultState) {
+                is Resource.Success -> {
+                    if (!resultState.data.isNullOrEmpty()) {
                         _state.value = CoffeeListState(modelItem = resultState.data)
                         insertIcedListItemsIntoDB(resultState.data)
-                    }else{
-                        _state.value = CoffeeListState(error ="Data Return With Null")
+                    } else {
+                        _state.value = CoffeeListState(error = "Data Return With Null")
                     }
                 }
-                is Resource.Loading ->{
+                is Resource.Loading -> {
                     _state.value = CoffeeListState(isLoading = true)
                 }
-                is Resource.Error ->{
-                    if(resultState.message!!.contains("internet")){
-                        val coffeeList = withContext(Dispatchers.Default){ coffeeMenuDatabase.coffeeMenuDao().getAllIcedCoffeeList}
-                        _state.value = CoffeeListState(modelItem = getIcedCoffeeListItemsFromDB(coffeeList))
-                    }else {
+                is Resource.Error -> {
+                    if (resultState.message!!.contains("internet")) {
+                        val coffeeList =
+                            withContext(Dispatchers.Default) { coffeeMenuDatabase.coffeeMenuDao().getAllIcedCoffeeList }
+                        _state.value =
+                            CoffeeListState(modelItem = getIcedCoffeeListItemsFromDB(coffeeList))
+                    } else {
                         _state.value = CoffeeListState(
-                            error = resultState.message ?: "un expected error occurred"
+                            error = resultState.message
                         )
                     }
                 }
@@ -57,7 +60,7 @@ class IcedCoffeeListViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private fun getIcedCoffeeListItemsFromDB(coffeeList: List<IcedCoffeeDetailsItem>) : CoffeeResponseModel{
+    private fun getIcedCoffeeListItemsFromDB(coffeeList: List<IcedCoffeeDetailsItem>): CoffeeResponseModel {
         // val list = ArrayList<CoffeeResponseModel.CoffeeResponseModelItem>()
         val list = CoffeeResponseModel()
         for (item in coffeeList) {
