@@ -10,19 +10,23 @@ import javax.inject.Inject
 
 class GetHotCoffeeListUseCase @Inject constructor(
     private val repository: CoffeeApiRepo
-){
+) {
     operator fun invoke() = flow<Resource<CoffeeResponseModel>> {
         try {
             emit(Resource.Loading<CoffeeResponseModel>())
             val coffeeResponseModel = repository.getHotCoffee()
             if (!coffeeResponseModel.isEmpty()) {
                 emit(Resource.Success<CoffeeResponseModel>(data = coffeeResponseModel))
-            }else {
-                emit(Resource.Error<CoffeeResponseModel>( "Data Return With Null"))
+            } else {
+                emit(Resource.Error<CoffeeResponseModel>("Data Return With Null"))
             }
-        }catch (e: HttpException){
-            emit(Resource.Error<CoffeeResponseModel>(e.localizedMessage?: "An unexpected error occurred"))
-        }catch (e: IOException){
+        } catch (e: HttpException) {
+            emit(
+                Resource.Error<CoffeeResponseModel>(
+                    e.localizedMessage ?: "An unexpected error occurred"
+                )
+            )
+        } catch (e: IOException) {
             emit(Resource.Error<CoffeeResponseModel>("Couldn't reach server. Please check your internet connection"))
         }
     }

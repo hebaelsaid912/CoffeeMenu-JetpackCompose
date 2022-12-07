@@ -7,10 +7,11 @@ import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.remote.CoffeeApiInt
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.CoffeeApiRepoImpl
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.HotCoffeeDBRepoImpl
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.IcedCoffeeDBRepoImpl
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.HotCoffeeDBRepo
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.IcedCoffeeDBRepo
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.HotCoffeeRepo
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.IcedCoffeeRepo
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.CoffeeApiRepo
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.utils.Constant.BASE_URL
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,19 +44,23 @@ object AppModule {
         ).build()
     }
 
-    @Provides
+    /*@Provides
     @Singleton
     fun provideCoffeeRepository(api: CoffeeApiInterface): CoffeeApiRepo {
         return CoffeeApiRepoImpl(api = api)
-    }
-    @Provides
+    }*/
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class DataPort{
+    @Binds
     @Singleton
-    fun provideCoffeeHotDaoRepository(coffeeMenuDatabase: CoffeeMenuDatabase): HotCoffeeDBRepo {
-        return HotCoffeeDBRepoImpl(coffeeMenuDatabase)
-    }
-    @Provides
+    abstract fun bindHotCoffeeRepo( impl: HotCoffeeDBRepoImpl):HotCoffeeRepo
+    @Binds
     @Singleton
-    fun provideCoffeeIcedDaoRepository(coffeeMenuDatabase: CoffeeMenuDatabase): IcedCoffeeDBRepo {
-        return IcedCoffeeDBRepoImpl(coffeeMenuDatabase)
-    }
+    abstract fun bindIcedCoffeeRepo( impl: IcedCoffeeDBRepoImpl):IcedCoffeeRepo
+    @Binds
+    @Singleton
+    abstract fun bindCoffeeMenuRepo( impl: CoffeeApiRepoImpl):CoffeeApiRepo
 }

@@ -1,8 +1,8 @@
 package com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.usecase.coffeedetails
 
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.model.responsemodel.CoffeeResponseModel
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.HotCoffeeDBRepoImpl
-import com.hebaelsaid.android.coffeemenu_jetpackcompose.data.repository.IcedCoffeeDBRepoImpl
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.HotCoffeeRepo
+import com.hebaelsaid.android.coffeemenu_jetpackcompose.domain.repository.IcedCoffeeRepo
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.utils.Constant.HOT_COFFEE_TYPE
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.utils.Constant.ICED_COFFEE_TYPE
 import com.hebaelsaid.android.coffeemenu_jetpackcompose.utils.Resource
@@ -14,8 +14,8 @@ import java.io.IOException
 import javax.inject.Inject
 
 class GetCoffeeDetailsUseCase @Inject constructor(
-    private val hotCoffeeDBRepositoryImpl: HotCoffeeDBRepoImpl,
-    private val icedCoffeeDBRepositoryImpl: IcedCoffeeDBRepoImpl
+    private val hotCoffeeRepo: HotCoffeeRepo,
+    private val icedCoffeeRepo: IcedCoffeeRepo
 ) {
     operator fun invoke(id: Int, type: String) =
         flow<Resource<CoffeeResponseModel.CoffeeResponseModelItem>> {
@@ -24,7 +24,7 @@ class GetCoffeeDetailsUseCase @Inject constructor(
                 when (type) {
                     HOT_COFFEE_TYPE -> {
                         val coffeeModel = withContext(Dispatchers.Default) {
-                           hotCoffeeDBRepositoryImpl.getHotCoffeeDetailsByName(id = id)
+                            hotCoffeeRepo.getHotCoffeeDetailsByName(id = id)
                         }
                         emit(
                             Resource.Success<CoffeeResponseModel.CoffeeResponseModelItem>(
@@ -40,7 +40,7 @@ class GetCoffeeDetailsUseCase @Inject constructor(
                     }
                     ICED_COFFEE_TYPE -> {
                         val coffeeModel = withContext(Dispatchers.Default) {
-                           icedCoffeeDBRepositoryImpl.getIcedCoffeeDetailsByName(id)
+                            icedCoffeeRepo.getIcedCoffeeDetailsByName(id)
                         }
                         emit(
                             Resource.Success<CoffeeResponseModel.CoffeeResponseModelItem>(
