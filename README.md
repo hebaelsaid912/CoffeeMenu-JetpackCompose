@@ -13,13 +13,26 @@ you can clone code and run it using :
   Compile Sdk : 33
 ``
 ## App Screen Recording
-
-![Screenshot_2022-12-03-15-38-22-459_com hebaelsaid android coffeemenu_jetbackcompose](https://user-images.githubusercontent.com/72816466/205443723-adfc4fcc-c9fc-490d-8065-796f41f5033f.jpg)
-![Screenshot_2022-12-03-15-38-32-503_com hebaelsaid android coffeemenu_jetbackcompose](https://user-images.githubusercontent.com/72816466/205443730-ee3b2b6a-0a03-4b3f-86a0-cc0b3b1c7ec0.jpg)
-![Screenshot_2022-12-03-15-38-35-626_com hebaelsaid android coffeemenu_jetbackcompose](https://user-images.githubusercontent.com/72816466/205443732-962d4653-5081-4578-b163-120bc704dea8.jpg)
-![Screenshot_2022-12-03-15-38-48-173_com hebaelsaid android coffeemenu_jetbackcompose](https://user-images.githubusercontent.com/72816466/205443740-9ac7923d-4218-4a09-9cc3-558fdb7054ed.jpg)
-![Screenshot_2022-12-03-15-38-56-690_com hebaelsaid android coffeemenu_jetbackcompose](https://user-images.githubusercontent.com/72816466/205443746-cbad0cfd-e7db-4688-92e4-e4adbb117747.jpg)
-
+ <table>
+  <tr>
+    <th>Onboarding Screen 3 </th>
+    <th>Home (Hot Coffee Menu)</th>
+    <th>Home (Iced Coffee Menu)</th>
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/72816466/205443723-adfc4fcc-c9fc-490d-8065-796f41f5033f.jpg" width="350"></td>
+    <td><img src="https://user-images.githubusercontent.com/72816466/205443730-ee3b2b6a-0a03-4b3f-86a0-cc0b3b1c7ec0.jpg" width="350"></td>
+    <td><img src="https://user-images.githubusercontent.com/72816466/205443732-962d4653-5081-4578-b163-120bc704dea8.jpg" width="350"></td>
+  </tr>
+  <tr>
+    <td>Hot Coffee Details Screen</td>
+    <td>Iced Coffee Details Screen</td>
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/72816466/205443740-9ac7923d-4218-4a09-9cc3-558fdb7054ed.jpg" width="350"></td>
+    <td><img src="https://user-images.githubusercontent.com/72816466/205443746-cbad0cfd-e7db-4688-92e4-e4adbb117747.jpg" width="350"></td>
+  </tr>
+</table> 
 
 ## Architecture
 The following diagram shows all the modules and how each module interact with one another after. This architecture using a layered software architecture. 
